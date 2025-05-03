@@ -1,6 +1,5 @@
 package com.coolcoder.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -12,14 +11,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-import com.coolcoder.service.UserService;
-
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-
-	@Autowired
-	private UserService userService;
 
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -34,7 +28,6 @@ public class SecurityConfig {
 		return new BCryptPasswordEncoder();
 	}
 
-	// ✅ Add this bean to fix the error
 	@Bean
 	public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
 		return config.getAuthenticationManager();
